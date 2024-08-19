@@ -3,213 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Career Personality Quiz</title>
+    <title>Advancing in AI</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            color: #333;
+            margin: 20px;
             padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
         }
         h1 {
+            color: #5b6d5b;
             text-align: center;
-            color: #007BFF;
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        h2 {
+            color: #556b2f;
         }
         .question {
             margin-bottom: 20px;
         }
-        .question h2 {
-            margin: 0;
-            font-size: 18px;
-        }
-        .options {
-            list-style: none;
-            padding: 0;
-        }
-        .options li {
-            margin-bottom: 10px;
-        }
-        .options input {
-            margin-right: 10px;
-        }
-        .submit-btn {
+        .question label {
             display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            margin: 5px 0;
             cursor: pointer;
         }
-        .result {
+        .submit-btn {
+            background-color: #556b2f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: block;
+            margin: 20px auto;
+        }
+        .submit-btn:hover {
+            background-color: #6b8e23;
+        }
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #dcedc8;
+            border-radius: 10px;
             display: none;
-            margin-top: 20px;
             text-align: center;
+        }
+        #result h2 {
+            color: #3a533a;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Which AI Career is Right for You?</h1>
-        <form id="quiz-form">
-            <!-- Question 1 -->
-            <div class="question">
-                <h2>1. What's your favorite way to spend a weekend?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q1" value="1"> Building or tinkering with gadgets</li>
-                    <li><input type="radio" name="q1" value="2"> Reading or solving puzzles</li>
-                    <li><input type="radio" name="q1" value="3"> Analyzing data or trends</li>
-                    <li><input type="radio" name="q1" value="4"> Creating art or design projects</li>
-                </ul>
-            </div>
+    <h1>How can you advance in AI?</h1>
+    <p>Take this simple quiz to find out which AI field might be the best fit for you, even if you have no technical background. Let's get started!</p>
 
-            <!-- Question 2 -->
-            <div class="question">
-                <h2>2. Which superhero power would you choose?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q2" value="1"> Super strength and agility</li>
-                    <li><input type="radio" name="q2" value="2"> Telepathy and mind control</li>
-                    <li><input type="radio" name="q2" value="3"> Precognition and future vision</li>
-                    <li><input type="radio" name="q2" value="4"> Shape-shifting and disguise</li>
-                </ul>
-            </div>
+    <form id="ai-specialization-quiz">
 
-            <!-- Question 3 -->
-            <div class="question">
-                <h2>3. What's your ideal project to work on?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q3" value="1"> Building a new robot</li>
-                    <li><input type="radio" name="q3" value="2"> Creating a novel or script</li>
-                    <li><input type="radio" name="q3" value="3"> Analyzing market trends for insights</li>
-                    <li><input type="radio" name="q3" value="4"> Designing a new user experience</li>
-                </ul>
-            </div>
-
-            <!-- Question 4 -->
-            <div class="question">
-                <h2>4. How do you prefer to solve problems?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q4" value="1"> Hands-on experimentation</li>
-                    <li><input type="radio" name="q4" value="2"> Deep thinking and planning</li>
-                    <li><input type="radio" name="q4" value="3"> Using data and facts</li>
-                    <li><input type="radio" name="q4" value="4"> Creative brainstorming</li>
-                </ul>
-            </div>
-
-            <!-- Question 5 -->
-            <div class="question">
-                <h2>5. What's your ideal work environment?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q5" value="1"> Lab or workshop</li>
-                    <li><input type="radio" name="q5" value="2"> Quiet office or library</li>
-                    <li><input type="radio" name="q5" value="3"> Dynamic and fast-paced office</li>
-                    <li><input type="radio" name="q5" value="4"> Creative studio or design space</li>
-                </ul>
-            </div>
-
-            <!-- Question 6 -->
-            <div class="question">
-                <h2>6. What excites you the most?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q6" value="1"> Building new technologies</li>
-                    <li><input type="radio" name="q6" value="2"> Understanding human behavior</li>
-                    <li><input type="radio" name="q6" value="3"> Uncovering hidden patterns</li>
-                    <li><input type="radio" name="q6" value="4"> Designing innovative solutions</li>
-                </ul>
-            </div>
-
-            <!-- Question 7 -->
-            <div class="question">
-                <h2>7. What kind of challenges do you enjoy?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q7" value="1"> Technical and mechanical issues</li>
-                    <li><input type="radio" name="q7" value="2"> Complex human interactions</li>
-                    <li><input type="radio" name="q7" value="3"> Large data sets and algorithms</li>
-                    <li><input type="radio" name="q7" value="4"> Creative design and aesthetics</li>
-                </ul>
-            </div>
-
-            <!-- Question 8 -->
-            <div class="question">
-                <h2>8. What’s your preferred type of learning?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q8" value="1"> Hands-on projects</li>
-                    <li><input type="radio" name="q8" value="2"> Reading and research</li>
-                    <li><input type="radio" name="q8" value="3"> Data analysis and experiments</li>
-                    <li><input type="radio" name="q8" value="4"> Creative workshops and brainstorming</li>
-                </ul>
-            </div>
-
-            <!-- Question 9 -->
-            <div class="question">
-                <h2>9. What motivates you the most in a job?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q9" value="1"> Innovation and invention</li>
-                    <li><input type="radio" name="q9" value="2"> Understanding and influencing people</li>
-                    <li><input type="radio" name="q9" value="3"> Solving complex problems</li>
-                    <li><input type="radio" name="q9" value="4"> Creating visually appealing products</li>
-                </ul>
-            </div>
-
-            <!-- Question 10 -->
-            <div class="question">
-                <h2>10. How do you handle unexpected problems?</h2>
-                <ul class="options">
-                    <li><input type="radio" name="q10" value="1"> Tackle them directly and practically</li>
-                    <li><input type="radio" name="q10" value="2"> Analyze the problem deeply before acting</li>
-                    <li><input type="radio" name="q10" value="3"> Use data to find solutions</li>
-                    <li><input type="radio" name="q10" value="4"> Get creative and think outside the box</li>
-                </ul>
-            </div>
-
-            <button type="button" class="submit-btn" onclick="calculateResult()">Submit</button>
-        </form>
-
-        <div class="result" id="result">
-            <h2>Your Ideal AI Career Path</h2>
-            <p id="career-path"></p>
+        <!-- Question 1 -->
+        <div class="question">
+            <h2>1. How do you prefer to solve problems?</h2>
+            <label><input type="radio" name="q1" value="machine-learning"> Looking at patterns and making predictions</label>
+            <label><input type="radio" name="q1" value="nlp"> Understanding and interpreting language</label>
+            <label><input type="radio" name="q1" value="computer-vision"> Visualizing and recognizing images</label>
+            <label><input type="radio" name="q1" value="robotics"> Building and tinkering with gadgets</label>
+            <label><input type="radio" name="q1" value="ai-ethics"> Thinking about the impact of technology on society</label>
         </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <h2>2. What would be your dream job?</h2>
+            <label><input type="radio" name="q2" value="machine-learning"> Predicting trends in business or sports</label>
+            <label><input type="radio" name="q2" value="nlp"> Writing stories or teaching languages</label>
+            <label><input type="radio" name="q2" value="computer-vision"> Working with photography or design</label>
+            <label><input type="radio" name="q2" value="robotics"> Inventing new gadgets or robots</label>
+            <label><input type="radio" name="q2" value="ai-ethics"> Shaping the rules that guide technology</label>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <h2>3. Which of these hobbies interests you the most?</h2>
+            <label><input type="radio" name="q3" value="machine-learning"> Analyzing statistics or playing strategy games</label>
+            <label><input type="radio" name="q3" value="nlp"> Reading books or learning new languages</label>
+            <label><input type="radio" name="q3" value="computer-vision"> Taking photos or making art</label>
+            <label><input type="radio" name="q3" value="robotics"> DIY projects or playing with tech toys</label>
+            <label><input type="radio" name="q3" value="ai-ethics"> Debating or discussing current events</label>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <h2>4. What type of challenge do you enjoy?</h2>
+            <label><input type="radio" name="q4" value="machine-learning"> Solving puzzles and finding patterns</label>
+            <label><input type="radio" name="q4" value="nlp"> Crafting meaningful sentences</label>
+            <label><input type="radio" name="q4" value="computer-vision"> Making sense of visual details</label>
+            <label><input type="radio" name="q4" value="robotics"> Building things from scratch</label>
+            <label><input type="radio" name="q4" value="ai-ethics"> Balancing different viewpoints</label>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <h2>5. How do you see technology affecting the future?</h2>
+            <label><input type="radio" name="q5" value="machine-learning"> Helping us make better decisions</label>
+            <label><input type="radio" name="q5" value="nlp"> Allowing us to communicate across cultures</label>
+            <label><input type="radio" name="q5" value="computer-vision"> Enhancing how we interact with the world visually</label>
+            <label><input type="radio" name="q5" value="robotics"> Automating everyday tasks</label>
+            <label><input type="radio" name="q5" value="ai-ethics"> Creating new rules and guidelines for society</label>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <h2>6. Which of these sounds like the most fun?</h2>
+            <label><input type="radio" name="q6" value="machine-learning"> Predicting who will win the next big game</label>
+            <label><input type="radio" name="q6" value="nlp"> Chatting with people from different countries</label>
+            <label><input type="radio" name="q6" value="computer-vision"> Turning a sketch into a digital masterpiece</label>
+            <label><input type="radio" name="q6" value="robotics"> Making a robot that can dance</label>
+            <label><input type="radio" name="q6" value="ai-ethics"> Discussing how AI will change the world</label>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <h2>7. What would you like to learn more about?</h2>
+            <label><input type="radio" name="q7" value="machine-learning"> How to make predictions with data</label>
+            <label><input type="radio" name="q7" value="nlp"> How to teach a computer to understand language</label>
+            <label><input type="radio" name="q7" value="computer-vision"> How to train a computer to recognize objects</label>
+            <label><input type="radio" name="q7" value="robotics"> How to build and program a robot</label>
+            <label><input type="radio" name="q7" value="ai-ethics"> How to ensure AI is fair and unbiased</label>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <h2>8. What’s your favorite type of movie?</h2>
+            <label><input type="radio" name="q8" value="machine-learning"> Thrillers that keep you guessing</label>
+            <label><input type="radio" name="q8" value="nlp"> Dramas with rich dialogue</label>
+            <label><input type="radio" name="q8" value="computer-vision"> Visually stunning sci-fi or fantasy</label>
+            <label><input type="radio" name="q8" value="robotics"> Action-packed adventures</label>
+            <label><input type="radio" name="q8" value="ai-ethics"> Thought-provoking documentaries</label>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <h2>9. What excites you most about AI?</h2>
+            <label><input type="radio" name="q9" value="machine-learning"> Its ability to learn and improve</label>
+            <label><input type="radio" name="q9" value="nlp"> Its ability to understand and generate language</label>
+            <label><input type="radio" name="q9" value="computer-vision"> Its ability to see and interpret images</label>
+            <label><input type="radio" name="q9" value="robotics"> Its ability to move and interact with the world</label>
+            <label><input type="radio" name="q9" value="ai-ethics"> Its potential to impact society</label>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <h2>10. What would you like to contribute to the world?</h2>
+            <label><input type="radio" name="q10" value="machine-learning"> Making smarter decisions with data</label>
+            <label><input type="radio" name="q10" value="nlp"> Bridging communication gaps</label>
+            <label><input type="radio" name="q10" value="computer-vision"> Improving how we see and experience the world</label>
+            <label><input type="radio" name="q10" value="robotics"> Creating machines that help people</label>
+            <label><input type="radio" name="q10" value="ai-ethics"> Ensuring technology benefits everyone</label>
+        </div>
+
+        <button type="submit" class="submit-btn">Discover Your AI Path!</button>
+    </form>
+
+    <div id="result">
+        <h2>Your Recommended AI field of study is:</h2>
+        <p id="specialization"></p>
     </div>
 
     <script>
-        function calculateResult() {
-            const answers = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(input => parseInt(input.value));
-            
-            if (answers.length < 10) {
-                alert('Please answer all questions.');
-                return;
+        document.getElementById('ai-specialization-quiz').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let scores = {
+                "machine-learning": 0,
+                "nlp": 0,
+                "computer-vision": 0,
+                "robotics": 0,
+                "ai-ethics": 0
+            };
+            let formData = new FormData(event.target);
+            for (let [name, value] of formData.entries()) {
+                scores[value]++;
             }
-
-            const scores = [0, 0, 0, 0];
-
-            answers.forEach(answer => {
-                scores[answer - 1]++;
-            });
-
-            const maxScore = Math.max(...scores);
-            const careerIndex = scores.indexOf(maxScore);
-
-            const careerPaths = [
-                "You might thrive as a **Machine Learning Engineer**, where you can build and deploy machine learning models and algorithms.",
-                "You might enjoy being a **Natural Language Processing (NLP) Engineer**, focusing on language understanding and text analysis.",
-                "You might be suited for a **Data Scientist** role, where you can analyze and interpret complex data to uncover valuable insights.",
-                "You might excel as a **Creative AI Specialist**, involved in innovative and creative AI projects like art and design."
-            ];
-
-            document.getElementById('career-path').innerText = careerPaths[careerIndex];
+            let highestScore = Math.max(...Object.values(scores));
+            let specialization = Object.keys(scores).find(key => scores[key] === highestScore);
+            document.getElementById('specialization').textContent = specialization.replace('-', ' ').toUpperCase();
             document.getElementById('result').style.display = 'block';
-        }
+        });
     </script>
 
 </body>
