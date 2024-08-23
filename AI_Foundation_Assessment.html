@@ -182,12 +182,12 @@
 
             const percentage = (score / totalQuestions) * 100;
 
-            if (percentage >= 70) {
+            if (percentage >= 80) {
                 resultDiv.className = 'result pass';
-                resultDiv.textContent = `Congratulations! You passed with a score of ${percentage}%! While you may already have a strong grasp of AI concepts, review the concepts shared in this module as a revision. Or you may skip to the end of the module and proceed to the next modules to understand AI ethics and AI in NCS.`;
+                resultDiv.textContent = `Congratulations! You passed with a score of ${percentage}%! Although you have a solid understanding of AI concepts, consider reviewing the material in this module for a quick revision. If you prefer, you can skip to the end and move on to the next module to understand AI ethics and explore AI in NCS.`;
             } else {
                 resultDiv.className = 'result fail';
-                resultDiv.textContent = `Unfortunately, you failed with a score of ${percentage}%. Please go through this module to familiarise yourself with the key concepts required for AI and build a strong foundation in AI concepts. This is crucial to enable yourself in the use and innovation with AI`;
+                resultDiv.textContent = `Unfortunately, you didn't pass this time, with a score of ${percentage}%. I encourage you to review this module to strengthen your understanding of key AI concepts. Building a solid foundation in these areas is essential for effectively using and innovating with AI.`;
                 document.getElementById('retryButton').style.display = 'block';
             }
 
