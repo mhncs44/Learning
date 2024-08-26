@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI Quiz</title>
+    <style>
+        body {
+            font-family: Ubuntu, sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            color: #00205C;
+            margin-top: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #00205C;
+            margin: 20px 0;
+        }
+        .question-container {
+            margin: 50px auto;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .btn {
+            background-color: #00205C;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .feedback {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #result {
+            text-align: center;
+        }
+        #passFailMessage {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Generative AI Quiz</h1>
+
+    <div class="question-container" id="question1">
+        <h2>Question 1: What is Generative AI?</h2>
+        <form>
+            <input type="radio" name="q1" value="c"> AI designed solely for robotics<br>
+            <input type="radio" name="q1" value="a"> A branch of AI that focuses on generating new content<br>
+            <input type="radio" name="q1" value="b"> An AI that only analyzes data<br>
+            <input type="radio" name="q1" value="d"> AI used for processing natural language<br>
+            <div class="btn-container">
+                <button type="button" class="btn" onclick="checkAnswer(1)">Submit</button>
+                <button type="button" class="btn" onclick="nextQuestion(2)" disabled id="nextBtn1">Next Question</button>
+            </div>
+        </form>
+        <div class="feedback" id="feedback1"></div>
+    </div>
+
+    <div class="question-container" id="question2" style="display:none;">
+        <h2>Question 2: Which of the following is an example of Generative AI?</h2>
+        <form>
+            <input type="radio" name="q2" value="b"> Creating a new image from scratch<br>
+            <input type="radio" name="q2" value="d"> Optimizing a supply chain<br>
+            <input type="radio" name="q2" value="c"> Sorting emails<br>
+            <input type="radio" name="q2" value="a"> Predicting stock prices<br>
+            <div class="btn-container">
+                <button type="button" class="btn" onclick="checkAnswer(2)">Submit</button>
+                <button type="button" class="btn" onclick="nextQuestion(3)" disabled id="nextBtn2">Next Question</button>
+            </div>
+        </form>
+        <div class="feedback" id="feedback2"></div>
+    </div>
+
+    <div class="question-container" id="question3" style="display:none;">
+        <h2>Question 3: What is a generative AI model?</h2>
+        <form>
+            <input type="radio" name="q3" value="a"> A model that generates new data similar to the training data<br>
+            <input type="radio" name="q3" value="b"> A model that only predicts outcomes<br>
+            <input type="radio" name="q3" value="c"> A model used only for classification tasks<br>
+            <input type="radio" name="q3" value="d"> A model that is pre-trained on large datasets<br>
+            <div class="btn-container">
+                <button type="button" class="btn" onclick="checkAnswer(3)">Submit</button>
+                <button type="button" class="btn" onclick="nextQuestion(4)" disabled id="nextBtn3">Next Question</button>
+            </div>
+        </form>
+        <div class="feedback" id="feedback3"></div>
+    </div>
+
+    <div class="question-container" id="question4" style="display:none;">
+        <h2>Q4: What does LLM stand for in the context of AI?</h2>
+        <form>
+            <input type="radio" name="q4" value="b"> Large Language Model<br>
+            <input type="radio" name="q4" value="a"> Linear Logistic Model<br>
+            <input type="radio" name="q4" value="c"> Low Latency Memory<br>
+            <input type="radio" name="q4" value="d"> Long Learning Module<br>
+            <div class="btn-container">
+                <button type="button" class="btn" onclick="checkAnswer(4)">Submit</button>
+                <button type="button" class="btn" onclick="nextQuestion(5)" disabled id="nextBtn4">Next Question</button>
+            </div>
+        </form>
+        <div class="feedback" id="feedback4"></div>
+    </div>
+
+     <div class="question-container" id="question5" style="display:none;">
+        <h2>Q5: What is a prompt?</h2>
+        <form>
+            <input type="radio" name="q5" value="a"> A textual or visual input given to an AI model<br>
+            <input type="radio" name="q5" value="b"> The process of training an AI model<br>
+            <input type="radio" name="q5" value="c"> The final output generated by an AI<br>
+            <input type="radio" name="q5" value="d"> A technique for optimizing neural networks<br>
+            <div class="btn-container">
+                <button type="button" class="btn" onclick="checkAnswer(5)">Submit</button>
+                <button type="button" class="btn" onclick="nextQuestion(6)" disabled id="nextBtn5">Next Question</button>
+            </div>
+        </form>
+        <div class="feedback" id="feedback5"></div>
+    </div>
+
+    <div class="question-container" id="question6" style="display:none;">
+        <h2>Q6: What is prompt engineering?</h2>
+        <form>
+            <input type="radio" name="q6" value="a"> The process of designing and refining prompts to improve AI output<br>
+            <input type="radio" name="q6" value="b"> The method of building AI hardware<br>
+            <input type="radio" name="q6" value="c"> A technique for optimizing neural network training<br>
+            <input type="radio" name="q6" value="d"> The creation of datasets for AI training<br>
+            <div class="btn-container">
+                <button type="button" class="btn" onclick="checkAnswer(6)">Submit</button>
+                <button type="button" class="btn" onclick="nextQuestion(7)" disabled id="nextBtn6">Next Question</button>
+            </div>
+        </form>
+        <div class="feedback" id="feedback6"></div>
+    </div>
+
+    <div class="question-container" id="question7" style="display:none;">
+        <h2>Q7: Which of the following is a true statement about generative AI?</h2>
+        <form>
+            <input type="radio" name="q7" value="a"> Generative AI can only create text content<br>
+            <input type="radio" name="q7" value="b"> Generative AI can generate new content like images, music, and text<br>
+            <input type="radio" name="q7" value="c"> Generative AI is the same as machine learning<br>
+            <input type="radio" name="q7" value="d"> Generative AI cannot be used for creative applications<br>
+            <div class="btn-container">
+                <button type="button" class="btn" onclick="checkAnswer(7)">Submit</button>
+                <button type="button" class="btn" onclick="nextQuestion(8)" disabled id="nextBtn7">Next Question</button>
+            </div>
+        </form>
+        <div class="feedback" id="feedback7"></div>
+    </div>
+
+    <div class="question-container" id="question8" style="display:none;">
+        <h2>Q8: Which of the following is a use case of Generative AI?</h2>
+        <form>
+            <input type="radio" name="q8" value="a"> Generating personalized email responses<br>
+            <input type="radio" name="q8" value="b"> Scheduling meetings<br>
+            <input type="radio" name="q8" value="c"> Sorting customer support tickets<br>
+            <input type="radio" name="q8" value="d"> Monitoring network security<br>
+            <div class="btn-container">
+                <button type="button" class="btn" onclick="checkAnswer(8)">Submit</button>
+                <button type="button" class="btn" onclick="showResults()" disabled id="nextBtn8">Finish</button>
+            </div>
+        </form>
+        <div class="feedback" id="feedback8"></div>
+    </div>
+
+ <div class="question-container" id="result" style="display:none;">
+        <h2>Your Score: <span id="score"></span></h2>
+        <div id="passFailMessage"></div>
+        <a href="https://example.com/revision" class="btn">Visit for Revision</a>
+    </div>
+
+
+
+    <script>
+        let correctAnswers = 0;
+        let totalQuestions = 8;
+
+        function checkAnswer(questionNumber) {
+            let selectedAnswer = document.querySelector('input[name="q' + questionNumber + '"]:checked');
+            let feedback = document.getElementById('feedback' + questionNumber);
+            let correctAnswer = ['a', 'b', 'a', 'b', 'a', 'a', 'b', 'a'][questionNumber - 1]; // Adjust based on the correct answer for each question
+            if (selectedAnswer) {
+                if (selectedAnswer.value === correctAnswer) {
+                    correctAnswers++;
+                    feedback.innerHTML = "<span style='color: green;'>Correct!</span>";
+                } else {
+                    feedback.innerHTML = "<span style='color: red;'>Incorrect.</span>";
+                }
+                document.getElementById('nextBtn' + questionNumber).disabled = false;
+            } else {
+                feedback.innerHTML = "<span style='color: red;'>Please select an answer.</span>";
+            }
+        }
+
+        function nextQuestion(nextQuestionNumber) {
+            document.getElementById('question' + (nextQuestionNumber - 1)).style.display = "none";
+            if (nextQuestionNumber <= totalQuestions) {
+                document.getElementById('question' + nextQuestionNumber).style.display = "block";
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('result').style.display = "block";
+            let score = Math.round((correctAnswers / totalQuestions) * 100);
+            document.getElementById('score').innerText = score + "%";
+            let passFailMessage = document.getElementById('passFailMessage');
+            if (score >= 80) {
+                passFailMessage.innerHTML = "<span style='color: green;'>Congratulations! You are ready to advance in Gen AI!</span>";
+            } else {
+                passFailMessage.innerHTML = "<span style='color: red;'>Unfortunately, you did not pass. Please revisit the AI Basics module to revise your AI basic knowledge.</span>";
+            }
+        }
+    </script>
+
+</body>
+</html>
