@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mastery Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question h3 {
+            margin-bottom: 10px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 5px 0;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Mastery Quiz</h1>
+    <form id="quizForm">
+        <!-- Question 1 -->
+        <div class="question">
+            <h3>1. What type of work excites you the most?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q1" value="Machine Learning"> Analyzing data to build predictive models</li>
+                <li><input type="radio" name="q1" value="Natural Language Processing"> Understanding and processing human language</li>
+                <li><input type="radio" name="q1" value="Generative AI"> Creating new content and ideas</li>
+                <li><input type="radio" name="q1" value="Robotics AI"> Building and programming robots</li>
+                <li><input type="radio" name="q1" value="AI Consultancy"> Advising on AI strategy and implementation</li>
+            </ul>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <h3>2. How do you prefer to solve problems?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q2" value="Machine Learning"> By developing algorithms and models</li>
+                <li><input type="radio" name="q2" value="Natural Language Processing"> By understanding linguistic patterns</li>
+                <li><input type="radio" name="q2" value="Generative AI"> By generating new and innovative solutions</li>
+                <li><input type="radio" name="q2" value="Robotics AI"> By designing and controlling physical systems</li>
+                <li><input type="radio" name="q2" value="AI Consultancy"> By providing strategic guidance and solutions</li>
+            </ul>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <h3>3. What is your ideal work environment?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q3" value="Machine Learning"> Working with large datasets and technical challenges</li>
+                <li><input type="radio" name="q3" value="Natural Language Processing"> Analyzing and interpreting human communication</li>
+                <li><input type="radio" name="q3" value="Generative AI"> Exploring creativity and generating content</li>
+                <li><input type="radio" name="q3" value="Robotics AI"> Building and testing physical robots and systems</li>
+                <li><input type="radio" name="q3" value="AI Consultancy"> Collaborating with clients to solve complex problems</li>
+            </ul>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <h3>4. How do you prefer to work on projects?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q4" value="Machine Learning"> By coding and experimenting with algorithms</li>
+                <li><input type="radio" name="q4" value="Natural Language Processing"> By analyzing text and speech data</li>
+                <li><input type="radio" name="q4" value="Generative AI"> By creating and evaluating new ideas</li>
+                <li><input type="radio" name="q4" value="Robotics AI"> By building and programming robots</li>
+                <li><input type="radio" name="q4" value="AI Consultancy"> By providing insights and strategic advice</li>
+            </ul>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <h3>5. What aspect of AI are you most interested in?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q5" value="Machine Learning"> Data-driven decision making and automation</li>
+                <li><input type="radio" name="q5" value="Natural Language Processing"> Understanding and generating human language</li>
+                <li><input type="radio" name="q5" value="Generative AI"> Creative applications and content generation</li>
+                <li><input type="radio" name="q5" value="Robotics AI"> Integrating AI with physical machines</li>
+                <li><input type="radio" name="q5" value="AI Consultancy"> Strategic implementation of AI solutions</li>
+            </ul>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <h3>6. How do you handle complex tasks?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q6" value="Machine Learning"> By breaking them into manageable models and algorithms</li>
+                <li><input type="radio" name="q6" value="Natural Language Processing"> By analyzing language patterns and structures</li>
+                <li><input type="radio" name="q6" value="Generative AI"> By brainstorming and iterating on creative solutions</li>
+                <li><input type="radio" name="q6" value="Robotics AI"> By designing and testing physical components</li>
+                <li><input type="radio" name="q6" value="AI Consultancy"> By addressing strategic and implementation challenges</li>
+            </ul>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <h3>7. What kind of projects do you prefer?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q7" value="Machine Learning"> Data-centric projects with predictive goals</li>
+                <li><input type="radio" name="q7" value="Natural Language Processing"> Language-focused projects involving text and speech</li>
+                <li><input type="radio" name="q7" value="Generative AI"> Projects that involve content creation and innovation</li>
+                <li><input type="radio" name="q7" value="Robotics AI"> Robotics projects that require hands-on work</li>
+                <li><input type="radio" name="q7" value="AI Consultancy"> Projects that involve strategic problem-solving and client interactions</li>
+            </ul>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <h3>8. What skills do you enjoy using the most?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q8" value="Machine Learning"> Programming and statistical analysis</li>
+                <li><input type="radio" name="q8" value="Natural Language Processing"> Linguistic analysis and computational techniques</li>
+                <li><input type="radio" name="q8" value="Generative AI"> Creative thinking and content generation</li>
+                <li><input type="radio" name="q8" value="Robotics AI"> Engineering and robotics programming</li>
+                <li><input type="radio" name="q8" value="AI Consultancy"> Strategic planning and consulting skills</li>
+            </ul>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <h3>9. How do you prefer to impact the world with AI?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q9" value="Machine Learning"> By improving efficiency and automation</li>
+                <li><input type="radio" name="q9" value="Natural Language Processing"> By enhancing human-computer interaction</li>
+                <li><input type="radio" name="q9" value="Generative AI"> By fostering creativity and innovation</li>
+                <li><input type="radio" name="q9" value="Robotics AI"> By advancing robotics and automation</li>
+                <li><input type="radio" name="q9" value="AI Consultancy"> By guiding organizations in AI implementation</li>
+            </ul>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <h3>10. What type of work culture do you thrive in?</h3>
+            <ul class="options">
+                <li><input type="radio" name="q10" value="Machine Learning"> Technical and research-focused</li>
+                <li><input type="radio" name="q10" value="Natural Language Processing"> Analytical and detail-oriented</li>
+                <li><input type="radio" name="q10" value="Generative AI"> Creative and experimental</li>
+                <li><input type="radio" name="q10" value="Robotics AI"> Hands-on and engineering-centric</li>
+                <li><input type="radio" name="q10" value="AI Consultancy"> Client-focused and strategic</li>
+            </ul>
+        </div>
+
+        <button type="button" onclick="calculateResult()">Submit</button>
+    </form>
+
+    <div id="result">
+        <h2>Your Recommended Field of AI Mastery:</h2>
+        <p id="recommendation"></p>
+    </div>
+
+    <script>
+        function calculateResult() {
+            var scores = {
+                "Machine Learning": 0,
+                "Natural Language Processing": 0,
+                "Generative AI": 0,
+                "Robotics AI": 0,
+                "AI Consultancy": 0
+            };
+
+            var form = document.getElementById('quizForm');
+            var elements = form.elements;
+
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i].type === 'radio' && elements[i].checked) {
+                    scores[elements[i].value]++;
+                }
+            }
+
+            var maxScore = 0;
+            var recommendation = '';
+
+            for (var field in scores) {
+                if (scores[field] > maxScore) {
+                    maxScore = scores[field];
+                    recommendation = field;
+                }
+            }
+
+            document.getElementById('recommendation').innerText = 'Based on your answers, you should delve into ' + recommendation + '.';
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
