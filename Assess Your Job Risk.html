@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How Future-Ready is Your Job in the Age of AI?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2em;
+      background-color: #f5f7fa;
+      color: #333;
+      max-width: 600px;
+      margin: auto;
+    }
+    h2 {
+      color: #2a71d0;
+    }
+    .question {
+      margin-bottom: 1em;
+    }
+    .question input {
+      margin-right: 0.5em;
+    }
+    .result {
+      margin-top: 2em;
+      padding: 1em;
+      border-radius: 8px;
+      background-color: #e3f2fd;
+      display: none;
+    }
+    button {
+      background-color: #2a71d0;
+      color: white;
+      padding: 0.6em 1.2em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1em;
+    }
+    button:hover {
+      background-color: #1c56a1;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>How Future-Ready is Your Job in the Age of AI?</h2>
+  <p>Answer a few questions to discover how AI-resilient your current role might be—and how you can future-proof your skills.</p>
+
+  <form id="quizForm">
+    <div class="question">
+      <label><input type="checkbox" name="q1"> My job involves a lot of repetitive tasks</label>
+    </div>
+    <div class="question">
+      <label><input type="checkbox" name="q2"> I don't currently use AI tools at work</label>
+    </div>
+    <div class="question">
+      <label><input type="checkbox" name="q3"> My work rarely requires creativity or critical thinking</label>
+    </div>
+    <div class="question">
+      <label><input type="checkbox" name="q4"> My job could be done remotely without much supervision</label>
+    </div>
+    <div class="question">
+      <label><input type="checkbox" name="q5"> I haven’t learned any new tech skills in the past year</label>
+    </div>
+
+    <button type="button" onclick="calculateScore()">Check My Future-Readiness</button>
+  </form>
+
+  <div class="result" id="resultBox"></div>
+
+  <script>
+    function calculateScore() {
+      const form = document.getElementById('quizForm');
+      const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+      let score = 0;
+      checkboxes.forEach(box => {
+        if (box.checked) score++;
+      });
+
+      const resultBox = document.getElementById('resultBox');
+      resultBox.style.display = 'block';
+
+      let resultText = '';
+      if (score <= 1) {
+        resultText = "🚀 You're in a great spot! Your job shows strong signs of AI resilience. Keep upskilling and staying ahead!";
+      } else if (score <= 3) {
+        resultText = "🛠️ Your job has moderate risk. Start exploring how AI can support your work—and upskill in creativity, strategy or people skills.";
+      } else {
+        resultText = "⚠️ Your job may face disruption. Consider learning how to *work with AI*, not against it. Adaptability is your best asset!";
+      }
+
+      resultBox.textContent = resultText;
+    }
+  </script>
+
+</body>
+</html>
