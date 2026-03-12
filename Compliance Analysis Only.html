@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NCS | Learning Governance Matrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --ncs-navy: #002D72;
+      --ncs-blue: #005EB8;
+      --ncs-sky: #00ADEE;
+      --bg-light: #F8FAFC;
+      --white: #ffffff;
+      --text-main: #1D1D1D;
+      --text-muted: #575757;
+      --border-color: #D1D9E6;
+      --shadow-soft: 0 4px 20px rgba(0, 45, 114, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Ubuntu', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--ncs-navy);
+      color: white;
+      padding: 2rem 0;
+      border-bottom: 4px solid var(--ncs-sky);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .matrix-description {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: #E2E8F0;
+      max-width: 900px;
+      font-weight: 300;
+    }
+
+    .section-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-color);
+    }
+
+    h2 { 
+      color: var(--ncs-navy); 
+      border-left: 6px solid var(--ncs-sky); 
+      padding-left: 15px; 
+      margin-top: 0;
+      font-size: 1.4rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .full-width { grid-column: span 2; }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--ncs-navy);
+    }
+
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: 'Ubuntu';
+      font-size: 15px;
+    }
+
+    /* Improved Yes-No Layout */
+    .logic-gates {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .logic-item {
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .radio-group label {
+      margin-bottom: 0;
+      font-weight: 400;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #edf2f7;
+    }
+
+    /* Range Slider Styling */
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #fcfdfe;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      border: 1px solid #edf2f7;
+    }
+
+    input[type="range"] { flex-grow: 1; accent-color: var(--ncs-blue); }
+    .score-badge {
+      background: var(--ncs-navy);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 700;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    /* Tracker UI */
+    .tracker-box {
+      background: #F0F4F8;
+      border: 2px dashed var(--ncs-navy);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .tracker-val { font-size: 2.5rem; font-weight: 700; color: var(--ncs-navy); }
+    .highlight-red { color: #C53030; }
+
+    .btn-generate {
+      background: var(--ncs-navy);
+      color: white;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 45, 114, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal {
+      background: white;
+      width: 95%;
+      max-width: 950px;
+      padding: 40px;
+      border-radius: 20px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .recommendation-box { padding: 25px; border-radius: 12px; margin-top: 20px; border-left: 8px solid; }
+    .optional-theme { background: #fff5f5; border-color: #feb2b2; }
+    .mandatory-theme { background: #f0fff4; border-color: #48bb78; }
+    .targeted-theme { background: #f0f7ff; border-color: var(--ncs-sky); }
+
+    .next-steps-list {
+        background: #F8FAFC;
+        border: 1px solid var(--border-color);
+        padding: 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container" style="padding: 0 20px;">
+    <h1 style="margin:0; font-size: 2.2rem;">Learning Governance Matrix</h1>
+    <p class="matrix-description">
+        Use this form to assess whether a learning request should be rolled out to the whole company, targeted to selected groups, or handled through other channels such as EDM, manager briefing, or job aids. Use this form to also help you ascertain the next step of your request.
+    </p>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="section-card">
+    <h2>1. General Information</h2>
+    <div class="form-grid">
+      <div class="form-group"><label>Training Topic</label><input type="text" id="topic"></div>
+      <div class="form-group"><label>Requested By</label><input type="text" id="requestor"></div>
+      <div class="form-group"><label>When do you require by?</label><input type="text" id="dateReq"></div>
+      <div class="form-group">
+        <label>Content Status</label>
+        <select id="contentStatus">
+          <option value="new">New development is required</option>
+          <option value="exists">Training module already exists</option>
+          <option value="curious">Existing #curious content can be used</option>
+          <option value="unknown">I don't know</option>
+        </select>
+      </div>
+      <div class="form-group full-width"><label>Reasons for request</label><textarea id="reasons" rows="2"></textarea></div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>2. Governance Assessment</h2>
+    
+    <div class="logic-gates">
+        <div class="logic-item">
+            <label>Rollout to entire company required?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="allCompany" value="Yes"> Yes</label>
+                <label><input type="radio" name="allCompany" value="No" checked> No</label>
+            </div>
+        </div>
+        <div class="logic-item">
+            <label>Can this be role targeted?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="isTargeted" value="Yes" checked> Yes - Role Targeted</label>
+                <label><input type="radio" name="isTargeted" value="No"> No - Required by everyone</label>
+            </div>
+        </div>
+        <div class="logic-item">
+            <label>Is this a local legal requirement?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="legalReq" value="Yes"> Yes</label>
+                <label><input type="radio" name="legalReq" value="No" checked> No</label>
+                <label><input type="radio" name="legalReq" value="Not sure"> Not sure</label>
+            </div>
+        </div>
+    </div>
+
+    <label>Necessity for Daily Job Performance (1 - Low to 10 - Critical)</label>
+    <div class="score-row">
+      <input type="range" id="workNeed" min="1" max="10" value="5" oninput="document.getElementById('nv').innerText = this.value">
+      <span class="score-badge" id="nv">5</span>
+    </div>
+
+    <label>Enterprise Risk Impact (1 - Low to 10 - Critical)</label>
+    <div class="score-row">
+      <input type="range" id="riskImpact" min="1" max="10" value="5" oninput="document.getElementById('rv').innerText = this.value">
+      <span class="score-badge" id="rv">5</span>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>3. Mandatory Training Hours Tracker</h2>
+    <div class="form-grid" style="align-items: center;">
+        <div class="form-group">
+            <label>Input the required training hours (e.g. 0.5):</label>
+            <input type="number" id="trainHours" value="0" step="0.5" oninput="updateTracker()">
+            <p style="margin-top:15px; font-size: 0.9rem; color: var(--text-muted);">
+                Employees currently spend an average of <strong>6.5 hrs/year</strong> on mandatory training.
+            </p>
+        </div>
+        <div class="tracker-box">
+            <p id="persuasionText" style="margin-top:0; font-weight: 500;">Adding this training will increase the annual mandatory load to:</p>
+            <div class="tracker-val" id="totalHoursDisplay">6.5 <small>hrs/yr</small></div>
+            <p style="font-size: 0.8rem; margin-bottom: 0; color: var(--text-muted);">per employee</p>
+        </div>
+    </div>
+  </section>
+
+  <button class="btn-generate" onclick="generateAssessment()">Generate Assessment & Action Plan</button>
+</div>
+
+<div class="modal-overlay" id="resultModal">
+  <div class="modal">
+    <h2 style="border-left: 6px solid var(--ncs-sky); padding-left: 15px;">Governance Recommendation</h2>
+    <div id="resultContent"></div>
+    
+    <div id="nextStepsContainer" class="next-steps-list"></div>
+
+    <div style="background: var(--ncs-navy); color: white; padding: 18px; border-radius: 8px; text-align: center; margin-top: 25px;">
+        <strong>Final Submission:</strong> Please email this full assessment to <a href="mailto:dojo@ncs.com.sg" style="color: var(--ncs-sky); text-decoration: underline;">dojo@ncs.com.sg</a>.
+    </div>
+
+    <div style="display:flex; gap:10px; margin-top:20px;">
+      <button onclick="document.getElementById('resultModal').style.display='none'" class="btn-generate" style="background:#E2E8F0; color:var(--ncs-navy); width: auto;">Close</button>
+      <button onclick="copyToClipboard()" class="btn-generate" style="flex-grow:1; background:var(--ncs-sky); color:var(--ncs-navy);">Copy Action Plan to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateTracker() {
+    const add = parseFloat(document.getElementById('trainHours').value) || 0;
+    const total = (6.5 + add).toFixed(1);
+    const display = document.getElementById('totalHoursDisplay');
+    display.innerHTML = `${total} <small>hrs/yr</small>`;
+    
+    if (add > 0) {
+        display.classList.add('highlight-red');
+    } else {
+        display.classList.remove('highlight-red');
+    }
+  }
+
+  function generateAssessment() {
+    const allCompany = document.querySelector('input[name="allCompany"]:checked').value;
+    const isTargeted = document.querySelector('input[name="isTargeted"]:checked').value;
+    const legalReq = document.querySelector('input[name="legalReq"]:checked').value;
+    const workNeed = parseInt(document.getElementById('workNeed').value);
+    const risk = parseInt(document.getElementById('riskImpact').value);
+    const contentStatus = document.getElementById('contentStatus').value;
+    
+    let resultType = "";
+    let steps = [];
+
+    // --- LOGIC DETERMINATION ---
+    // If entire company is required OR (legal req AND required by everyone)
+    if (allCompany === "Yes" || (legalReq === "Yes" && isTargeted === "No")) {
+      resultType = "Company-Wide Mandatory";
+    } 
+    // If it's legal BUT can be targeted OR if high risk and targeted
+    else if (isTargeted === "Yes" && (legalReq === "Yes" || risk >= 7)) {
+      resultType = "Targeted Mandatory";
+    } 
+    // Low risk, low daily need
+    else if (workNeed < 5 && risk < 5) {
+      resultType = "Optional";
+    } 
+    else {
+      resultType = "Awareness Only";
+    }
+
+    // --- RECOMMENDATION DISPLAY ---
+    let recHTML = "";
+    if (resultType === "Company-Wide Mandatory") {
+      recHTML = `<div class="recommendation-box mandatory-theme"><h3>Result: Company-Wide Mandatory Training</h3><p>This request mandates a full rollout for all staff due to universal necessity or legal compliance.</p></div>`;
+      steps = [
+        "Obtain a formal Senior Leader mandate and written support.",
+        "Submit request to Governance, Risk and Compliance (GRC) for final regulatory approval."
+      ];
+    } else if (resultType === "Targeted Mandatory") {
+      recHTML = `<div class="recommendation-box targeted-theme"><h3>Result: Targeted Mandatory Training</h3><p>Mandatory for specific cohorts. High risk/legal requirement detected but only relevant to selected roles.</p></div>`;
+      steps = [
+          "Identify and map exactly which roles or cohorts are impacted.",
+          "Obtain BU Head approval for mandatory time allocation for their staff."
+      ];
+    } else if (resultType === "Awareness Only") {
+      recHTML = `<div class="recommendation-box targeted-theme"><h3>Result: Awareness Campaign</h3><p>Information sharing only. No formal completion mandate required.</p></div>`;
+      steps = [
+          "Utilize lighter-touch channels such as EDMs, Aglow, or Townhall segments.",
+          "Position as 'Self-paced Learning' for interested parties only."
+      ];
+    } else {
+      recHTML = `<div class="recommendation-box optional-theme"><h3>Result: Optional Learning Resource</h3><p>Useful but not essential. Keep discoverable but avoid mandatory assignment.</p></div>`;
+      steps = [
+          "Do not place on the main LMS landing page for mass rollout.",
+          "Use just-in-time enablement (checklists/guides) at the point of need.",
+          "Review if an EDM or Job Aid can solve the problem first."
+      ];
+    }
+
+    if (contentStatus === "new") {
+        steps.push("<strong>Self-paced Learning Development:</strong> Allocate 3 months for production; budget 7.5k - 15k SGD if outsourced.");
+    }
+
+    steps.push("<strong>Get in touch with Dojo:</strong> Email dojo@ncs.com.sg to discuss the final rollout strategy.");
+
+    document.getElementById('resultContent').innerHTML = recHTML;
+    let stepsHTML = "<h3>Your Next Steps:</h3><ul>";
+    steps.forEach(s => stepsHTML += `<li>${s}</li>`);
+    stepsHTML += "</ul>";
+    document.getElementById('nextStepsContainer').innerHTML = stepsHTML;
+    document.getElementById('resultModal').style.display = 'flex';
+  }
+
+  function copyToClipboard() {
+    const text = document.getElementById('nextStepsContainer').innerText;
+    navigator.clipboard.writeText(text).then(() => alert("Action Plan copied!"));
+  }
+</script>
+
+</body>
+</html>
