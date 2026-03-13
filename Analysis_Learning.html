@@ -1,0 +1,411 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NCS | Learning Analysis Request</title>
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <!-- Use the same Ubuntu font family as the Governance Matrix to keep the look and feel consistent -->
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Colour palette copied from the original Analysis_Compliance file to maintain a cohesive brand look */
+    :root {
+      --ncs-navy: #002D72;
+      --ncs-blue: #005EB8;
+      --ncs-sky: #00ADEE;
+      --bg-light: #F8FAFC;
+      --white: #ffffff;
+      --text-main: #1D1D1D;
+      --text-muted: #575757;
+      --border-color: #D1D9E6;
+      --shadow-soft: 0 4px 20px rgba(0, 45, 114, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Ubuntu', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+    /* Header styling to mirror the Governance Matrix */
+    header {
+      background: var(--ncs-navy);
+      color: white;
+      padding: 2rem 0;
+      border-bottom: 4px solid var(--ncs-sky);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .matrix-description {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: #E2E8F0;
+      max-width: 900px;
+      font-weight: 300;
+    }
+    /* Card styling reused for each section */
+    .section-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-color);
+    }
+    h2 {
+      color: var(--ncs-navy);
+      border-left: 6px solid var(--ncs-sky);
+      padding-left: 15px;
+      margin-top: 0;
+      font-size: 1.4rem;
+    }
+    /* Grid layout for form fields */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+    .full-width {
+      grid-column: span 2;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--ncs-navy);
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="url"],
+    input[type="date"],
+    select,
+    textarea,
+    input[type="range"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: 'Ubuntu';
+      font-size: 15px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    /* Score slider row for numeric fields 8 & 9 */
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #fcfdfe;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      border: 1px solid #edf2f7;
+    }
+    input[type="range"] {
+      flex-grow: 1;
+      accent-color: var(--ncs-blue);
+    }
+    .score-badge {
+      background: var(--ncs-navy);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 700;
+      min-width: 50px;
+      text-align: center;
+    }
+    /* Button styling */
+    .btn-submit {
+      background: var(--ncs-navy);
+      color: white;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover {
+      background: #001e4d;
+    }
+    /* Modal for displaying diagnosis and action plan */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 45, 114, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .modal {
+      background: white;
+      width: 95%;
+      max-width: 950px;
+      padding: 40px;
+      border-radius: 20px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .next-steps-list {
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 25px;
+    }
+    /* Utility classes */
+    .flex {
+      display: flex;
+    }
+    .gap-10 {
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="padding: 0 20px;">
+      <h1 style="margin:0; font-size: 2.2rem;">Learning Analysis Request</h1>
+      <p class="matrix-description">
+        Use this form to gather essential details about a proposed learning initiative before meeting with the L&amp;D team. A clear and complete request helps us focus on skills-first solutions and identify the right next steps.
+      </p>
+    </div>
+  </header>
+  <div class="container">
+    <!-- Section 1: General Information -->
+    <section class="section-card">
+      <h2>General Information</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="requestorName">Requestor Name</label>
+          <input type="text" id="requestorName" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="requestorEmail">Requestor Email</label>
+          <input type="email" id="requestorEmail" placeholder="your.name@ncs.com.sg">
+        </div>
+        <div class="form-group">
+          <label for="department">Department</label>
+          <input type="text" id="department" placeholder="e.g. Sales, HR, Tech">
+        </div>
+        <div class="form-group">
+          <label for="sponsor">Senior Leader/Sponsor</label>
+          <input type="text" id="sponsor" placeholder="Name of senior leader supporting this">
+        </div>
+        <div class="form-group">
+          <label for="targetLearners">Target Learners (roles or groups)</label>
+          <input type="text" id="targetLearners" placeholder="e.g. New hires, Sales managers">
+        </div>
+        <div class="form-group">
+          <label for="numLearners">Number of Learners Targeted</label>
+          <input type="number" id="numLearners" min="1" placeholder="e.g. 150">
+        </div>
+        <div class="form-group">
+          <label for="recurring">Is this a recurring training?</label>
+          <select id="recurring">
+            <option value="one-off">One-off / ad hoc</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="biannual">Twice a year</option>
+            <option value="annual">Annual</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="deadline">When do you need this by?</label>
+          <input type="date" id="deadline">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Skills and Content -->
+    <section class="section-card">
+      <h2>Skills &amp; Content</h2>
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label for="skillsGap">Observed Skills Gaps / Required Upgrade (include Learning Objectives if known)</label>
+          <textarea id="skillsGap" placeholder="Describe the gap in skills, behaviours or knowledge and any learning objectives you have in mind"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="smeAvailability">Subject Matter Expert (SME) Availability</label>
+          <select id="smeAvailability">
+            <option value="committed">Committed SME</option>
+            <option value="review-only">Only available for review</option>
+            <option value="none">Haven't identified SME</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contentStatus">Learning Content Availability</label>
+          <select id="contentStatus">
+            <option value="new">New development is required</option>
+            <option value="external">External learning content or vendors available</option>
+            <option value="curious">Available on #curious</option>
+            <option value="not-sure">Not sure</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ncsSpecific">If new development is required, is this NCS‑specific content?</label>
+          <select id="ncsSpecific">
+            <option value="">Not applicable / not sure</option>
+            <option value="yes">Yes – content is unique to NCS</option>
+            <option value="no">No – consider #curious catalogue first</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label for="resourcesLink">Link to existing resources for content analysis (if any)</label>
+          <input type="url" id="resourcesLink" placeholder="https://...">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Importance & Priority -->
+    <section class="section-card">
+      <h2>Importance &amp; Priority</h2>
+      <label>Necessity for Skills at Work (1 - Low to 10 - Critical)</label>
+      <div class="score-row">
+        <input type="range" id="necessity" min="1" max="10" value="5" oninput="document.getElementById('necessityVal').innerText = this.value">
+        <span class="score-badge" id="necessityVal">5</span>
+      </div>
+      <label>Priority for Department (1 - Good to have &nbsp;–&nbsp; 10 - Very important)</label>
+      <div class="score-row">
+        <input type="range" id="priority" min="1" max="10" value="5" oninput="document.getElementById('priorityVal').innerText = this.value">
+        <span class="score-badge" id="priorityVal">5</span>
+      </div>
+      <div class="form-group full-width">
+        <label for="priorityReason">Elaborate on the priority (why is this important?)</label>
+        <textarea id="priorityReason" placeholder="Please explain why this priority level was chosen"></textarea>
+      </div>
+      <div class="form-group full-width">
+        <label for="comments">Any other comments for us to know</label>
+        <textarea id="comments" placeholder="Additional context or constraints"></textarea>
+      </div>
+    </section>
+
+    <!-- Submission button -->
+    <button class="btn-submit" onclick="diagnose(); return false;">Submit for Diagnosis</button>
+  </div>
+
+  <!-- Modal for Diagnosis and Action Plan -->
+  <div class="modal-overlay" id="diagnosisModal">
+    <div class="modal">
+      <h2 style="border-left: 6px solid var(--ncs-sky); padding-left: 15px;">Diagnosis &amp; Action Plan</h2>
+      <div id="diagnosisContent"></div>
+      <div id="nextStepsList" class="next-steps-list"></div>
+      <div class="flex gap-10" style="margin-top: 20px;">
+        <button onclick="document.getElementById('diagnosisModal').style.display='none'" class="btn-submit" style="background:#E2E8F0; color:var(--ncs-navy); width:auto;">Close</button>
+        <button onclick="copyDiagnosis()" class="btn-submit" style="flex-grow:1; background:var(--ncs-sky); color:var(--ncs-navy);">Copy Diagnosis to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /*
+      The diagnose function aggregates the stakeholder inputs, displays them back for verification,
+      and outlines the recommended next steps based on the guidelines provided.
+    */
+    function diagnose() {
+      // Gather form values
+      const name = document.getElementById('requestorName').value.trim();
+      const email = document.getElementById('requestorEmail').value.trim();
+      const department = document.getElementById('department').value.trim();
+      const sponsor = document.getElementById('sponsor').value.trim();
+      const targetLearners = document.getElementById('targetLearners').value.trim();
+      const numLearners = parseInt(document.getElementById('numLearners').value) || 0;
+      const recurring = document.getElementById('recurring').value;
+      const deadline = document.getElementById('deadline').value;
+      const skillsGap = document.getElementById('skillsGap').value.trim();
+      const smeAvailability = document.getElementById('smeAvailability').value;
+      const contentStatus = document.getElementById('contentStatus').value;
+      const ncsSpecific = document.getElementById('ncsSpecific').value;
+      const resourcesLink = document.getElementById('resourcesLink').value.trim();
+      const necessity = parseInt(document.getElementById('necessity').value);
+      const priority = parseInt(document.getElementById('priority').value);
+      const priorityReason = document.getElementById('priorityReason').value.trim();
+      const comments = document.getElementById('comments').value.trim();
+
+      // Build a summary of the stakeholder input
+      let summaryHtml = '<h3>Stakeholder Input</h3><ul>';
+      summaryHtml += `<li><strong>Name:</strong> ${name}</li>`;
+      summaryHtml += `<li><strong>Email:</strong> ${email}</li>`;
+      summaryHtml += `<li><strong>Department:</strong> ${department}</li>`;
+      summaryHtml += `<li><strong>Senior Leader/Sponsor:</strong> ${sponsor}</li>`;
+      summaryHtml += `<li><strong>Target Learners:</strong> ${targetLearners}</li>`;
+      summaryHtml += `<li><strong>Number of Learners:</strong> ${numLearners}</li>`;
+      summaryHtml += `<li><strong>Frequency:</strong> ${recurring}</li>`;
+      summaryHtml += `<li><strong>Deadline:</strong> ${deadline}</li>`;
+      summaryHtml += `<li><strong>Skills Gap / Objectives:</strong> ${skillsGap}</li>`;
+      summaryHtml += `<li><strong>SME Availability:</strong> ${smeAvailability}</li>`;
+      summaryHtml += `<li><strong>Content Status:</strong> ${contentStatus}</li>`;
+      summaryHtml += `<li><strong>NCS-specific:</strong> ${ncsSpecific || 'Not applicable'}</li>`;
+      summaryHtml += `<li><strong>Resources Link:</strong> ${resourcesLink || 'N/A'}</li>`;
+      summaryHtml += `<li><strong>Necessity:</strong> ${necessity}/10</li>`;
+      summaryHtml += `<li><strong>Priority:</strong> ${priority}/10</li>`;
+      summaryHtml += `<li><strong>Reason for Priority:</strong> ${priorityReason || 'None provided'}</li>`;
+      summaryHtml += `<li><strong>Additional Comments:</strong> ${comments || 'None'}</li>`;
+      summaryHtml += '</ul>';
+
+      document.getElementById('diagnosisContent').innerHTML = summaryHtml;
+
+      // Construct the next steps list based on guidelines
+      const steps = [];
+
+      // Step 1: ensure key details are available (skills gap, SME, content status)
+      if (!skillsGap || smeAvailability === 'none' || contentStatus === 'not-sure') {
+        steps.push('Please provide observed skills gaps, SME availability and content status (new/external/#curious) before we can proceed.');
+      }
+      // Step 2: ensure a sponsor is named
+      if (!sponsor) {
+        steps.push('Identify a senior leader or sponsor to support this initiative.');
+      }
+      // Step 3: high priority > 5 requires justification
+      if (priority > 5 && !priorityReason) {
+        steps.push('Priority is high; please elaborate on why this project is urgent or strategically important.');
+      }
+      // Step 4: small audience (<100 learners) recommendation
+      if (numLearners > 0 && numLearners < 100) {
+        steps.push('As the target audience is fewer than 100 learners, consider a live webinar or recording. We can help convert the session into a SCORM module for repeat viewing.');
+      }
+      // Step 5: new development budgeting and alternatives
+      if (contentStatus === 'new') {
+        steps.push('New development requires a minimum of 3 months and a committed SME. Budget S$7.5k–S$15k per 15‑minute module if internal Dojo resource is unavailable. Alternatively, we can upskill your team to create the content.');
+      }
+      // Generic note about NCS-specific content decision
+      if (contentStatus === 'new' && ncsSpecific === 'no') {
+        steps.push('The content may not be unique to NCS – explore existing #curious or third-party resources before commissioning new development.');
+      }
+
+      // Always include final note on engagement
+      steps.push('Once the above conditions are met, the Programme Managers will contact you to discuss next steps and finalise the action plan. You may copy this diagnosis and update the Dojo Programme Manager/Learning Designer via email.');
+
+      let stepsHtml = '<h3>Your Next Steps</h3><ul>';
+      steps.forEach(s => stepsHtml += `<li>${s}</li>`);
+      stepsHtml += '</ul>';
+      document.getElementById('nextStepsList').innerHTML = stepsHtml;
+
+      // Show the modal
+      document.getElementById('diagnosisModal').style.display = 'flex';
+    }
+
+    // Copy diagnosis content to clipboard
+    function copyDiagnosis() {
+      const text = document.getElementById('diagnosisContent').innerText + '\n' + document.getElementById('nextStepsList').innerText;
+      navigator.clipboard.writeText(text).then(() => alert('Diagnosis and action plan copied!'));
+    }
+  </script>
+</body>
